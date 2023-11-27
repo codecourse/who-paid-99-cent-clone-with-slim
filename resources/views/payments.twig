@@ -1,0 +1,27 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+    <h1 class="text-3xl md:text-5xl font-extrabold text-center uppercase mb-12 bg-gradient-to-r from-indigo-400 via-purple-500 to-indigo-600 bg-clip-text text-transparent transform -rotate-2">Who paid 99¢</h1>
+
+    {% if messages.status %}
+        {% include 'includes/message.twig' with {'message': messages.status | first} %}
+    {% endif %}
+
+    <div>
+        <h2 class="font-bold text-xl text-gray-800 mb-6 text-center">
+            {{ payments.count() }} people paid 99¢
+        </h2>
+
+        {% for payment in payments %}
+            <div class="flex items-center justify-between border-b-2 border-gray-100 py-2">
+                <div class="text-gray-800">
+                    {{ payment.name }}
+                </div>
+
+                <div class="text-sm text-gray-600">
+                    {{ payment.created_at.format('D iS M Y') }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
